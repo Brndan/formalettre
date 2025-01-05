@@ -79,7 +79,7 @@
 
     v(1.7cm)
 
-    [*Objet : objet*]
+    [*Objet : #objet*]
     
     v(0.7cm)
 
