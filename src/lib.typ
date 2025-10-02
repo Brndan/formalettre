@@ -1,5 +1,5 @@
 // Known envelope formats
-#let formats_enveloppe = (
+#let formats-enveloppe = (
     c4: (width: 32.4cm, height: 22.9cm),
     c5: (width: 22.9cm, height: 16.2cm),
     c6: (width: 16.2cm, height: 11.4cm),
@@ -12,10 +12,10 @@
 // * a string containing the name of a known format, e.g. "c4" or "dl";
 // * a tuple (<width>, <height>);
 // * a format dictionary (width: <width>, height: <height>).
-#let parse_format(spec) = {
+#let parse-format(spec) = {
     let format = (:)
     if type(spec) == str {
-        format = formats_enveloppe.at(
+        format = formats-enveloppe.at(
             lower(spec),
             default: none)
         if format == none {
@@ -39,12 +39,12 @@
 
 // (Small-)capitalize content if the capitalization level is above a minimum
 // value
-#let capitalise(cap_level, min_level, content) = {
+#let capitalise(cap-level, min-level, content) = {
     let cap = smallcaps
-    if calc.fract(cap_level) != 0 {
+    if calc.fract(cap-level) != 0 {
         cap = upper
     }
-    if cap_level >= min_level {
+    if cap-level >= min-level {
         return cap(content)
     }
     else {
@@ -53,7 +53,7 @@
 }
 
 
-#let lien_tel(numero) = {
+#let lien-tel(numero) = {
     if type(numero) == str {
         link("tel:" + numero.replace(" ", "-"), numero)
     } else {
@@ -62,7 +62,7 @@
 }
 
 
-#let lien_email(adresse) = {
+#let lien-email(adresse) = {
     if type(adresse) == str {
         link("mailto:" + adresse, raw(adresse))
     } else {
@@ -71,7 +71,7 @@
 }
 
 
-#let bloc_adresse(personne, capitalisation: 0) = {
+#let bloc-adresse(personne, capitalisation: 0) = {
     capitalise(capitalisation, 3, personne.nom)
     linebreak()
     // personne.adresse may be a simple string or content, convert it to a list
@@ -102,7 +102,7 @@
     //     telephone: "01 99 00 67 89",              // optional
     //     email: "untel@example.com",               // optional
     //     signature: [Prénom],                      // optional
-    //     image_signature: image("signature.png"),  // optional
+    //     image-signature: image("signature.png"),  // optional
     // )
     expediteur: none,    // actually required, see panic below
     // destinataire is actually required, see panic below
@@ -136,7 +136,7 @@
     pj: none,
     cc: none,
     marges: (1cm, 1cm),
-    marque_pliage: false,
+    marque-pliage: false,
     enveloppe: none,
     affranchissement: none,
     capitalisation: 0,
@@ -174,7 +174,7 @@
     // expediteur.adresse is required (but may be an empty list as there exist
     //     organizations that only have a name and a locality)
     // expediteur.commune is required
-    // expediteur.pays is optional and handled by bloc_adresse()
+    // expediteur.pays is optional and handled by bloc-adresse()
     expediteur.telephone = expediteur.at("telephone", default: none)
     expediteur.email = expediteur.at("email", default: none)
     expediteur.coordonnees = expediteur.at("coordonnees", default: ())
@@ -187,14 +187,14 @@
             #expediteur.nom
         ]
     }
-    expediteur.image_signature = expediteur.at("image_signature", default: none)
+    expediteur.image-signature = expediteur.at("image-signature", default: none)
 
     // Set default values for recipient-specific optional fields
     // destinataire.nom is required
     // destinataire.adresse is required (but may be an empty list as there exist
     //     organization that only have a name and a locality)
     // destinataire.commune is required
-    // destinataire.pays is optional and handled by bloc_adresse()
+    // destinataire.pays is optional and handled by bloc-adresse()
 
     // S'il y a une seule coordonnée supplémentaire, par exemple un site Web,
     // l'utilisateur peut le préciser sous la forme d'une unique chaîne ou
@@ -207,18 +207,18 @@
     // Insérer le numéro de téléphone et l'adresse électronique au début des
     // coordonnées de l'expéditeur
     if type(expediteur.email) == str or type(expediteur.email) == content {
-        expediteur.coordonnees.insert(0, ([], lien_email(expediteur.email)))
+        expediteur.coordonnees.insert(0, ([], lien-email(expediteur.email)))
     } else if type(expediteur.telephone) == array {
-        expediteur.coordonnees.insert(0, (expediteur.email.at(0), lien_email(expediteur.email.at(1))))
+        expediteur.coordonnees.insert(0, (expediteur.email.at(0), lien-email(expediteur.email.at(1))))
     }
     if type(expediteur.telephone) == str or type(expediteur.telephone) == content {
-        expediteur.coordonnees.insert(0, ([], lien_tel(expediteur.telephone)))
+        expediteur.coordonnees.insert(0, ([], lien-tel(expediteur.telephone)))
     } else if type(expediteur.telephone) == array {
-        expediteur.coordonnees.insert(0, (expediteur.telephone.at(0), lien_email(expediteur.telephone.at(1))))
+        expediteur.coordonnees.insert(0, (expediteur.telephone.at(0), lien-email(expediteur.telephone.at(1))))
     }
 
     // Bloc de coordonnées de l'expéditeur, utilisées dans l'en-tête
-    expediteur.bloc_coordonnees = {
+    expediteur.bloc-coordonnees = {
         for coordonnee in expediteur.coordonnees {
             if type(coordonnee) == array [
                 #coordonnee.at(0) #coordonnee.at(1) \
@@ -229,8 +229,8 @@
     }
 
     // Bloc d'adresse du destinataire, utilisable pour l'en-tête et l'enveloppe
-    destinataire.bloc_adresse = [
-        #bloc_adresse(destinataire, capitalisation: capitalisation)
+    destinataire.bloc-adresse = [
+        #bloc-adresse(destinataire, capitalisation: capitalisation)
     ]
 
     // La numérotation automatique correspond à une fonction de numérotation
@@ -329,12 +329,12 @@
             rows: (20mm, 1fr, auto, 1fr, 20mm),
             grid.cell(rowspan: 5, {  // sender address and contact info
                 if enveloppe == none {
-                    bloc_adresse(expediteur, capitalisation: capitalisation)
+                    bloc-adresse(expediteur, capitalisation: capitalisation)
                 } else {
-                    bloc_adresse(expediteur)
+                    bloc-adresse(expediteur)
                 }
-                if expediteur.bloc_coordonnees != [] {
-                    par(expediteur.bloc_coordonnees)
+                if expediteur.bloc-coordonnees != [] {
+                    par(expediteur.bloc-coordonnees)
                 }
             }),
             grid.cell(colspan: 3,  // place and date
@@ -349,9 +349,9 @@
             grid.cell[],                // filler #2
             grid.cell(                  // sender address
                 if enveloppe == none {
-                    bloc_adresse(destinataire, capitalisation: capitalisation)
+                    bloc-adresse(destinataire, capitalisation: capitalisation)
                 } else {
-                    bloc_adresse(destinataire)
+                    bloc-adresse(destinataire)
                 }
             ),
             grid.cell[],                // filler #3
@@ -365,7 +365,7 @@
         )
     )
 
-    if marque_pliage {
+    if marque-pliage {
         place(
             top + left, dx: -25mm, dy: 74mm,
             line(length: 1cm, stroke: .1pt))
@@ -421,16 +421,16 @@
                 salutation
             }
 
-            let hauteur_signature = 3cm
-            if expediteur.image_signature != none {
-                hauteur_signature = auto
+            let hauteur-signature = 3cm
+            if expediteur.image-signature != none {
+                hauteur-signature = auto
             }
 
             if type(expediteur.signature) == array {
                 let n = expediteur.signature.len()
                 grid(
                     columns: expediteur.signature.map(_ => 1fr),
-                    rows: (hauteur_signature, auto),
+                    rows: (hauteur-signature, auto),
                     grid.cell(colspan: n, []),
                     ..expediteur.signature.map(
                         signature => grid.cell[
@@ -442,11 +442,11 @@
             } else {
                 grid(
                     columns: (1fr, 1fr),
-                    rows: (hauteur_signature, auto),
+                    rows: (hauteur-signature, auto),
                     grid.cell(rowspan: 2, []),
                     grid.cell[
                         #set align(center + horizon)
-                        #expediteur.image_signature
+                        #expediteur.image-signature
                     ],
                     grid.cell[
                         #set align(center)
@@ -512,7 +512,7 @@
     })
 
     if enveloppe != none {
-        let format = parse_format(enveloppe)
+        let format = parse-format(enveloppe)
 
         pagebreak()
         // Le numéro de page vient d'être incrémenté. On le décrémente pour
@@ -559,7 +559,7 @@
                     grid.cell[         // sender block
                         #set align(left + top)
                         Expéditeur :\
-                        #bloc_adresse(expediteur, capitalisation: capitalisation)
+                        #bloc-adresse(expediteur, capitalisation: capitalisation)
                     ],
                     grid.cell[         // stamp block
                         #set align(right + top)
@@ -574,9 +574,9 @@
                 align(
                     left + horizon,
                     if intermediaire != none {
-                        bloc_adresse(intermediaire, capitalisation: capitalisation)
+                        bloc-adresse(intermediaire, capitalisation: capitalisation)
                     } else {
-                        bloc_adresse(destinataire, capitalisation: capitalisation)
+                        bloc-adresse(destinataire, capitalisation: capitalisation)
                     }
                 )
             ),

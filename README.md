@@ -22,7 +22,7 @@ Pour utiliser le template, il est possible de recopier le fichier exemple.
 - `expediteur.email` : l'email fourni sera affiché en police mono et cliquable. *Chaîne de caractères*, *facultatif*.
 - `expediteur.coordonnees` : coordonnées supplémentaires, par exemple site Web. *Liste de contenus*, *facultatif*.
 - `expediteur.signature` : précise le nom à afficher en signature de fin de lettre. Par défaut, cela reprend le prénom et le nom, *facultatif*.
-- `expediteur.image_signature` : peut être rempli avec un contenu de type `image("signature.png")` pour intégrer l'image d'une signature numérisée. *Facultatif*
+- `expediteur.image-signature` : peut être rempli avec un contenu de type `image("signature.png")` pour intégrer l'image d'une signature numérisée. *Facultatif*
 
 ### Destinataire
 
@@ -68,7 +68,7 @@ pj: [
 
 - `cc` : permet d'indiquer les destinataires additionnels de cette lettre, sous la forme d'une liste, *facultatif*.
 - `marges` : indiquer deux dimensions pour ajouter des marges supplémentaires à gauche et à droite du corps de la lettre: `(1cm, 1cm)` par défaut, *facultatif*.
-- `marque_pliage` : `false` par défaut, mettre à `true` pour imprimer une petite ligne indiquant où plier la page pour la mettre dans une enveloppe DL ou C5/6. *Facultatif*.
+- `marque-pliage` : `false` par défaut, mettre à `true` pour imprimer une petite ligne indiquant où plier la page pour la mettre dans une enveloppe DL ou C5/6. *Facultatif*.
 - `enveloppe` : permet de générer une page à imprimer sur une enveloppe de la taille indiquée, qui peut être une chaîne contenant le nom d'un format courant (`c4`, `c5`, `c6`, `c56` ou `dl`) ou une spécification manuelle sous la forme `(<longueur>, <largeur>)`. *Facultatif*.
 - `affranchissement` : fournir une chaîne (code d'affranchissement) ou un contenu tel que `image("timbre.png")` pour imprimer un affranchissement dans la zone idoine de l'enveloppe. *Facultatif*.
 - `capitalisation` : indiquer un niveau de capitalisation des adresses, *facultatif* :
@@ -129,12 +129,12 @@ expediteur: (
 )
 ```
 
-Dans le cas ordinaire d'un signataire unique, on peut également inclure une image de signature numérisée avec l'option `image_signature`. Celle-ci prend un contenu libre, ce qui suffit à inclure simplement une image à sa taille naturelle `image("signature.png")` ou au besoin de régler sa taille et de l'espacer :
+Dans le cas ordinaire d'un signataire unique, on peut également inclure une image de signature numérisée avec l'option `image-signature`. Celle-ci prend un contenu libre, ce qui suffit à inclure simplement une image à sa taille naturelle `image("signature.png")` ou au besoin de régler sa taille et de l'espacer :
 
 ```typc
 expediteur: (
     …,
-    image_signature: pad(
+    image-signature: pad(
         top: 10mm, bottom: 5mm,
         image("signature.png", height: 3cm)
     ),

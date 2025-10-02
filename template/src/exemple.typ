@@ -25,7 +25,7 @@ expediteur: (
   // signature: ([Étienne de la Boétie], [Lambert Daneau]),
   // Décommenter la ligne suivante pour inclure l'image d'une signature
   // numérisée
-  // image_signature: image("signature.png"),
+  // image-signature: image("signature.png"),
 ),
 destinataire: (
   nom: [Michel de Montaigne],
@@ -60,7 +60,7 @@ ps: [Au fait, notez bien notre prochain rendez-vous !],
 marges: (1.5cm, 1cm),   // pour ajouter des marges supplémentaires à gauche
                         // et à droite du corps de la lettre
                         //
-marque_pliage: false,   // indiquez true pour imprimer une marque de pliage
+marque-pliage: false,   // indiquez true pour imprimer une marque de pliage
                         //
 enveloppe: none,        // indiquez un format d'enveloppe, par exemple
                         // "c4", "c5", "c6", "c56" ou "dl"
