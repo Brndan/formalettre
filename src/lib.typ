@@ -208,7 +208,7 @@
     // coordonnées de l'expéditeur
     if type(expediteur.email) == str or type(expediteur.email) == content {
         expediteur.coordonnees.insert(0, ([], lien-email(expediteur.email)))
-    } else if type(expediteur.telephone) == array {
+    } else if type(expediteur.email) == array {
         expediteur.coordonnees.insert(0, (expediteur.email.at(0), lien-email(expediteur.email.at(1))))
     }
     if type(expediteur.telephone) == str or type(expediteur.telephone) == content {
