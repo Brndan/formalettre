@@ -457,7 +457,7 @@
         }
     )
 
-    if ps != none or ps != none or cc != none {
+    if pj != none or ps != none or cc != none {
         let width = 2.5em
         let mentions = ()
 
