@@ -214,7 +214,7 @@
     if type(expediteur.telephone) == str or type(expediteur.telephone) == content {
         expediteur.coordonnees.insert(0, ([], lien-tel(expediteur.telephone)))
     } else if type(expediteur.telephone) == array {
-        expediteur.coordonnees.insert(0, (expediteur.telephone.at(0), lien-email(expediteur.telephone.at(1))))
+        expediteur.coordonnees.insert(0, (expediteur.telephone.at(0), lien-tel(expediteur.telephone.at(1))))
     }
 
     // Bloc de coordonnées de l'expéditeur, utilisées dans l'en-tête
