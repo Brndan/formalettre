@@ -50,12 +50,14 @@ Corps de la lettre : #lorem(150)
 - `expediteur.signature` : précise le nom à afficher en signature de fin de lettre. Par défaut, cela reprend le prénom et le nom, *facultatif*.
 - `expediteur.image-signature` : peut être rempli avec un contenu de type `image("signature.png")` pour intégrer l'image d'une signature numérisée. *Facultatif*
 
+
 ### Destinataire
 
 - `destinataire.nom` : nom ou titre du ou de la destinataire, **requis**.
 - `destinataire.adresse` : adresse, sans la commune, sous forme de contenu ou de liste s'il y a aucune ou plusieurs lignes, **requis**.
 - `destinataire.commune` : code postal et commune du ou de la destinataire, **requis**.
 - `destinataire.pays` : pays du ou de la destinataire, *facultatif*.
+
 
 ### Intermédiaire
 
@@ -68,6 +70,7 @@ l'enveloppe, si on en imprime une.
 - `intermediaire.adresse` : adresse, sans la commune, sous forme de contenu ou de liste s'il y a plusieurs lignes, **requis** en cas de génération d'enveloppe.
 - `intermediaire.commune` : code postal et commune de l'intermédiaire, **requis** en cas de génération d'enveloppe.
 - `intermediaire.pays` : pays de l'intermédiaire, *facultatif*.
+
 
 ### Lettre
 
@@ -111,7 +114,9 @@ Le texte de la lettre proprement dite se situe après la configuration de la let
 À la fin de la lettre, il est possible de décommenter les deux dernières lignes pour ajouter une image en guise de signature. Veillez dans ce cas à positionner la varibale `expediteur.signature` à `true`.
 
 
+
 ## Notes
+
 
 ### Téléphone, email et coordonnées
 
@@ -142,6 +147,7 @@ expediteur: (
 )
 ```
 
+
 ### Signature
 
 Par défaut, le prénom et le nom de l'expéditeur sont repris pour la signature, mais on peut indiquer spécifiquement ce qu'on veut en renseignant l'option `signature`, par exemple pour signer avec son seul prénom.
@@ -166,6 +172,7 @@ expediteur: (
     ),
 )
 ```
+
 
 ### Post-scriptum
 
@@ -211,6 +218,7 @@ Vous pouvez également fournir une liste, auquel cas elles seront indiquées sou
 ps: ("Dossier n°1", "Dossier n°2", "Attestation")
 ```
 
+
 ### Affranchissement
 
 Les services postaux de plusieurs pays proposent des services en ligne d'affranchissement à domicile. Il s'agit :
@@ -229,6 +237,7 @@ Dans le second cas, les timbres à imprimer ne sont malheureusement pas fournis 
 ```typc
 affranchissement: image("timbre.png"),
 ```
+
 
 ### Numérotation des pages
 
