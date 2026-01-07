@@ -1,15 +1,41 @@
 # Formalettre : writing french letters with typst
 
 
-
 Un template destiné à écrire des lettres selon une typographie francophone, et inspiré du package LaTeX [lettre](https://ctan.org/pkg/lettre).
 
 Pour utiliser le template, il est possible de recopier le fichier exemple.
 
 
+## Synopsis
+
+```typm
+#import "@preview/formalettre:0.3.1": lettre
+
+#show: lettre.with(
+expediteur: (
+  nom: [Étienne #smallcaps[de la Boétie]],
+  adresse: [145 avenue de Germignan],
+  commune: [33320 Le Taillan-Médoc],
+  telephone: "01 99 00 67 89",
+  email: "etienne@laboetie.example",
+),
+destinataire: (
+  nom: [Michel de Montaigne],
+  adresse: [17 butte Farémont],
+  commune: [55000 Bar-le-Duc],
+),
+lieu: [Camp Germignan],
+objet: [Lorem ipsum ?],
+date: [le 7 juin 1559],
+appel: [Cher ami,],
+salutation: [Veuillez agréer, cher ami, l'assurance de mes chaleureuses salutations.],
+)
+
+Corps de la lettre : #lorem(150)
+```
+
 
 ## Documentation des variables
-
 
 
 ### Expéditeur 
