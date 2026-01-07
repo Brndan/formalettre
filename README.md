@@ -200,9 +200,10 @@ ps: (
 )
 ```
 
+
 ### Pièces jointes
 
-Vous pouvez préciser les pièces jointes sous forme de contenu libre :
+Vous pouvez préciser les pièces jointes sous forme de contenu libre, en utilisant par exemple une liste à puces ou une liste numérotée :
 
 ```typc
 pj: [
