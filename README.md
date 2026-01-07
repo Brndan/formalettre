@@ -256,3 +256,38 @@ En particulier :
 
 Quel que soit le mode de numérotation choisi, l'éventuelle enveloppe imprimable
 n'est *jamais* numérotée.
+
+
+### Chargement des informations d'expéditeur
+
+Les informations d'expéditeur peuvent être définies dans un fichier externe
+situé à côté du fichier Typst, par exemple `expediteur.yml` :
+
+```yaml
+nom: Étienne de la Boétie
+adresse: 145 avenue de Germignan
+commune: 33320 Le Taillan-Médoc
+telephone: 01 99 00 67 89
+email: etienne@laboetie.example
+```
+
+Cet expéditeur pourra ensuire être utilisé dans le modèle `lettre` :
+
+```typm
+#show: lettre.with(
+  expediteur: yaml("expediteur.yml"),
+  destinataire: (
+    nom: [Michel de Montaigne],
+    adresse: [17 butte Farémont],
+    commune: [55000 Bar-le-Duc],
+  ),
+  …
+)
+```
+
+Cette façon de faire comporte quelques limitations :
+
+* le fichier de définition d'expéditeur doit être à côté du fichier source ou dans un sous-répertoire (il peut toutefois être un lien symbolique ou physique vers un fichier situé ailleurs) ;
+* vous ne pouvez pas utiliser de marquage Typst dans les informations d'expéditeur.
+
+Il est également possible d'utiliser plusieurs profils d'expéditeur avec des informations différentes, par exemple pour les lettres personnelles et professionnelles, en définissant un dictionnaire dont chaque élément correspond à un profil. La conception et l'utilisation d'un tel dictionnaire est laissée au lecteur en guise d'exercice. Pour augmenter le défi, un dictionnaire d'expéditeurs peut être défini dans un fichier Typst puis importé pour utilisation dans un lettre. ;-)
